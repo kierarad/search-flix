@@ -33,6 +33,7 @@ describe("MovieSearch", function() {
     request = jasmine.Ajax.requests.mostRecent();
     request.respondWith(TestResponses.getMovies.successWithResults);
 
-    expect(document.getElementById("tiles").children.length).toBe(2);
+
+    expect(document.getElementsByClassName("tile").length).toBe(3);
   });
 });
