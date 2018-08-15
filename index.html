@@ -14,8 +14,10 @@
                   placeholder="Search for a movie"
                   aria-label="Search for a movie"
                   id='search-input'
-                  oninput='new MovieSearch().getMovies(this.value)'>  <!-- aria-label for accessibility -->
+                  oninput='document.getElementById("error-message").innerText = ""; new MovieSearch().getMovies(this.value)'>  <!-- aria-label for accessibility -->
         </form>
     </div>
+    <div id="error-message"></div>
+    <div id="movie-tiles"></div>
   </body>
 </html>
