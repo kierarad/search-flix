@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Flix</title>
+    <link rel="icon" href="images/icon.png">
+    <script type="text/javascript" src="javascripts/vendor/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="javascripts/search.js"></script>
+  </head>
+  <body>
+    <div class="header">
+        <form id="search-form" role="search"> <!-- role for accessibility -->
+          <input  type="search"
+                  name="q"
+                  placeholder="Search for a movie"
+                  aria-label="Search for a movie"
+                  id='search-input'
+                  oninput='new MovieSearch().getMovies(this.value)'>  <!-- aria-label for accessibility -->
+        </form>
+    </div>
+  </body>
+</html>
