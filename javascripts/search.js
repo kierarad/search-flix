@@ -19,19 +19,33 @@
         }
 
         if (r.Response === "True") {
-          var container = document.getElementById("tiles");
-          for (var movieData of r.Search) {
-            var tile = createMovieTile(movieData);
-            container.appendChild(tile);
-          }
+          addMovies(r.Search);
         }
       }).fail(function onFailure(r) {
         console.log(r.responseJSON.Error);
       });
     };
 
+    var init = function init(){
+      addMovies(initData);
+    };
+
+    var addMovies = function addMovies(movies) {
+      var newContainer = document.createElement("div");
+      newContainer.setAttribute("id", "tiles");
+      newContainer.setAttribute("class", "tiles");
+
+      for (var movieData of movies) {
+        var tile = createMovieTile(movieData);
+        newContainer.appendChild(tile);
+      }
+
+      var current = document.getElementById("tiles");
+      current.replaceWith(newContainer);
+    };
+
     var createMovieTile = function createMovieTile(movieData) {
-      var tileTemplate = document.querySelector(".tile");
+      var tileTemplate = document.getElementById("tile");
       var tile = tileTemplate.cloneNode(true);
       tile.removeAttribute("style");
       tile.querySelector(".poster img").setAttribute("src", movieData.Poster);
@@ -42,10 +56,10 @@
     };
 
     return {
-      getMovies: getMovies
+      getMovies: getMovies,
+      init: init
     };
   };
 
   window.MovieSearch = MovieSearch;
-
 })(jQuery);
