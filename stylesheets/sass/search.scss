@@ -1,0 +1,28 @@
+@import "variables.scss";
+
+body {
+  margin: 0;
+}
+
+.header {
+  height: $header-height;
+  background-color: $primary-color;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  border-bottom: 1px solid $border-color;
+
+  .search-form {
+    width: 300px;
+    margin: 0 auto;
+
+    .search-bar {
+      -webkit-appearance: none;
+      border-radius: 3px;
+      border: 1px solid $secondary-color;
+      height: 26px;
+      margin: 12px 0;
+      width: 100%;
+    }
+  }
+}

@@ -48,12 +48,21 @@
       var tileTemplate = document.getElementById("tile");
       var tile = tileTemplate.cloneNode(true);
       tile.removeAttribute("style");
-      tile.querySelector(".poster img").setAttribute("src", movieData.Poster);
+      tile.querySelector(".poster").style.backgroundImage ="url(" + validateImgURL(movieData.Poster) + ")";
       tile.querySelector(".title").innerText = movieData.Title;
       tile.querySelector(".type").innerText = movieData.Type;
 
       return tile;
     };
+
+    var validateImgURL = function validateImgURL(url) {
+      if (url === "N/A") {
+        return "";
+      }
+
+      return url;
+    };
+
 
     return {
       getMovies: getMovies,

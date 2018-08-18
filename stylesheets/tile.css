@@ -1,0 +1,49 @@
+.tiles {
+  margin-top: 50px;
+  padding: 10px; }
+  .tiles::after {
+    clear: both;
+    content: "";
+    display: block; }
+  .tiles .tile {
+    width: calc(100% - 40px);
+    float: left;
+    margin-left: 20px;
+    background-color: #f3f3f3;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    margin: 10px 0;
+    border: 1px solid #e6e6e6; }
+    @media (min-width: 480px) {
+      .tiles .tile {
+        width: calc(50% - 30px);
+        float: left;
+        margin-left: 20px; } }
+    @media (min-width: 786px) {
+      .tiles .tile {
+        width: calc(25% - 25px);
+        float: left;
+        margin-left: 20px; } }
+    .tiles .tile .poster {
+      min-height: 430px;
+      max-width: 300px;
+      margin: 0 auto;
+      margin-top: 15px;
+      background-repeat: no-repeat;
+      background-color: #f3f3f3;
+      border: 1px solid #fff; }
+    .tiles .tile .title {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 5px 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden; }
+    .tiles .tile .type {
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #a6a6a6; }
+
+/*# sourceMappingURL=tile.css.map */

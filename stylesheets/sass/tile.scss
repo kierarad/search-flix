@@ -1,0 +1,71 @@
+@import "../neat/neat";
+@import "variables.scss";
+
+$neat-grid-mobile: (
+  columns: 1
+);
+
+$neat-grid-tablet: (
+  columns: 2,
+  gutter: 20px,
+  media: "(min-width: 480px)"
+);
+
+$neat-grid: (
+  columns: 4,
+  gutter: 20px,
+  media: "(min-width: 786px)"
+);
+
+.tiles{
+  @include grid-container;
+
+  margin-top: $header-height;
+  padding: 10px;
+
+  .tile {
+    @include grid-column(1, $neat-grid-mobile);
+
+    @include grid-media($neat-grid-tablet) {
+      @include grid-column(1);
+    };
+
+    @include grid-media($neat-grid) {
+      @include grid-column(1);
+    };
+
+    background-color: $secondary-color;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    margin: 10px 0;
+    border: 1px solid $border-color;
+
+
+    .poster {
+      min-height: 430px;
+      max-width: 300px;
+      margin: 0 auto;
+      margin-top: 15px;
+      background-repeat: no-repeat;
+      background-color: $secondary-color;
+      border: 1px solid #fff;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 5px 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .type {
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #a6a6a6;
+    }
+  }
+}

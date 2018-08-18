@@ -3,25 +3,28 @@
   <head>
     <title>Search Flix</title>
     <link rel="icon" href="images/icon.png">
+    <link rel="stylesheet" href="stylesheets/search.css" />
+    <link rel="stylesheet" href="stylesheets/tile.css" />
     <script type="text/javascript" src="javascripts/vendor/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="javascripts/initData.js"></script>
     <script type="text/javascript" src="javascripts/search.js"></script>
   </head>
   <body>
     <div class="header">
-        <form id="search-form" role="search"> <!-- role for accessibility -->
+        <form class="search-form" role="search"> <!-- role for accessibility -->
           <input  type="search"
                   name="q"
-                  placeholder="Search for a movie"
-                  aria-label="Search for a movie"
+                  placeholder="Search movie titles..."
+                  aria-label="Search movie titles"
                   id='search-input'
-                  oninput='document.getElementById("error-message").innerText = ""; new MovieSearch().getMovies(this.value)'>  <!-- aria-label for accessibility -->
+                  class='search-bar'
+                  oninput='document.getElementById("error-message").innerText = ""; MovieSearch().getMovies(this.value)'>  <!-- aria-label for accessibility -->
         </form>
     </div>
     <div id="error-message"></div>
-    <div id="tiles">
-      <div class="tile" style="display:none">
-        <div class="poster"><img alt="poster"/></div>
+    <div id="tiles" class="tiles">
+      <div id="tile" class="tile">
+        <div class="poster"></div>
         <div class="title"></div>
         <div class="type"></div>
       </div>
