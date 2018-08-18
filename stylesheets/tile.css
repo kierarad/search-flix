@@ -14,7 +14,9 @@
     text-transform: uppercase;
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     margin: 10px 0;
-    border: 1px solid #e6e6e6; }
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px #f3f3f3; }
     @media (min-width: 480px) {
       .tiles .tile {
         width: calc(50% - 30px);

@@ -40,6 +40,8 @@ $neat-grid: (
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     margin: 10px 0;
     border: 1px solid $border-color;
+    border-radius: 3px;
+    box-shadow: 1px 1px 5px $secondary-color;
 
 
     .poster {
