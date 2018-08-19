@@ -31,10 +31,7 @@
       min-height: 430px;
       max-width: 300px;
       margin: 0 auto;
-      margin-top: 15px;
-      background-repeat: no-repeat;
-      background-color: #f3f3f3;
-      border: 1px solid #fff; }
+      margin-top: 15px; }
     .tiles .tile .title {
       font-size: 18px;
       font-weight: 500;
@@ -47,5 +44,7 @@
       font-size: 14px;
       margin-bottom: 5px;
       color: #a6a6a6; }
+    .tiles .tile .details.hidden {
+      display: none; }
 
 /*# sourceMappingURL=tile.css.map */

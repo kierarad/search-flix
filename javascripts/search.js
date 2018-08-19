@@ -31,6 +31,12 @@
     };
 
     var getDetails = function getDetails(tile) {
+      var detailsContainer = tile.querySelector(".details");
+      if (detailsContainer.childElementCount) {
+        toggleDetails(detailsContainer);
+        return false;
+      }
+
       var imdbID = tile.dataset.id;
       if (imdbID === "") {
         return false;
@@ -44,21 +50,26 @@
         }
       }).done(function onSuccess(r) {
         if (r.Response === "True") {
-          showDetails(r, tile);
+          showDetails(r, detailsContainer);
         }
       }).fail(function onFailure(r) {
         console.log(r.responseJSON.Error);
       });
     }
 
-    var showDetails = function showDetails(details, tile) {
+    var showDetails = function showDetails(details, detailsContainer) {
       var topics = ["Title", "Year", "Genre", "Director", "imdbRating"];
       for (var topic of topics) {
         var infoDiv = document.createElement("div");
         infoDiv.innerText = topic + ": " + details[topic];
-        tile.querySelector(".details").appendChild(infoDiv);
+        detailsContainer.appendChild(infoDiv);
       }
+      toggleDetails(detailsContainer);
     };
+
+    var toggleDetails = function toggleDetails(detailsContainer) {
+      detailsContainer.classList.toggle("hidden");
+    }
 
     var addMovies = function addMovies(movies) {
       var current = document.querySelector(".tiles");
@@ -71,32 +82,20 @@
       }
 
       current.replaceWith(newContainer);
-
-      newContainer.addEventListener("mouseover", function(e) {
-        var tile = e.target.closest(".tile");
-        getDetails(tile);
-      });
     };
 
     var createMovieTile = function createMovieTile(movieData) {
       var tileTemplate = document.querySelector(".tile");
       var tile = tileTemplate.cloneNode(true);
+      tile.addEventListener("mouseenter", function(e) { e.stopPropogation; getDetails(this); });
+      tile.addEventListener("mouseleave", function(e) { e.stopPropogation; toggleDetails(this.querySelector(".details")); });
       tile.setAttribute("data-id", movieData.imdbID);
-      tile.querySelector(".poster").style.backgroundImage ="url(" + validateImgURL(movieData.Poster) + ")";
+      tile.querySelector(".poster img").src = movieData.Poster;
       tile.querySelector(".title").innerText = movieData.Title;
       tile.querySelector(".type").innerText = movieData.Type;
 
       return tile;
     };
-
-    var validateImgURL = function validateImgURL(url) {
-      if (url === "N/A") {
-        return "";
-      }
-
-      return url;
-    };
-
 
     return {
       getMovies: getMovies,

@@ -49,9 +49,6 @@ $neat-grid: (
       max-width: 300px;
       margin: 0 auto;
       margin-top: 15px;
-      background-repeat: no-repeat;
-      background-color: $secondary-color;
-      border: 1px solid #fff;
     }
 
     .title {
@@ -68,6 +65,12 @@ $neat-grid: (
       font-size: 14px;
       margin-bottom: 5px;
       color: #a6a6a6;
+    }
+
+    .details {
+      &.hidden {
+        display: none;
+      }
     }
   }
 }
