@@ -30,24 +30,58 @@
       addMovies(initData);
     };
 
+    var getDetails = function getDetails(tile) {
+      var imdbID = tile.dataset.id;
+      if (imdbID === "") {
+        return false;
+      }
+
+      $.ajax('http://www.omdbapi.com/', {
+        method: 'GET',
+        data: {
+          'apikey': 'aba065d3',
+          'i': imdbID
+        }
+      }).done(function onSuccess(r) {
+        if (r.Response === "True") {
+          showDetails(r, tile);
+        }
+      }).fail(function onFailure(r) {
+        console.log(r.responseJSON.Error);
+      });
+    }
+
+    var showDetails = function showDetails(details, tile) {
+      var topics = ["Title", "Year", "Genre", "Director", "imdbRating"];
+      for (var topic of topics) {
+        var infoDiv = document.createElement("div");
+        infoDiv.innerText = topic + ": " + details[topic];
+        tile.querySelector(".details").appendChild(infoDiv);
+      }
+    };
+
     var addMovies = function addMovies(movies) {
+      var current = document.querySelector(".tiles");
       var newContainer = document.createElement("div");
-      newContainer.setAttribute("id", "tiles");
-      newContainer.setAttribute("class", "tiles");
+      newContainer.classList.add("tiles");
 
       for (var movieData of movies) {
         var tile = createMovieTile(movieData);
         newContainer.appendChild(tile);
       }
 
-      var current = document.getElementById("tiles");
       current.replaceWith(newContainer);
+
+      newContainer.addEventListener("mouseover", function(e) {
+        var tile = e.target.closest(".tile");
+        getDetails(tile);
+      });
     };
 
     var createMovieTile = function createMovieTile(movieData) {
-      var tileTemplate = document.getElementById("tile");
+      var tileTemplate = document.querySelector(".tile");
       var tile = tileTemplate.cloneNode(true);
-      tile.removeAttribute("style");
+      tile.setAttribute("data-id", movieData.imdbID);
       tile.querySelector(".poster").style.backgroundImage ="url(" + validateImgURL(movieData.Poster) + ")";
       tile.querySelector(".title").innerText = movieData.Title;
       tile.querySelector(".type").innerText = movieData.Type;
