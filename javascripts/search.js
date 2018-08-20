@@ -108,8 +108,8 @@
       tile.addEventListener("mouseleave", function(e) { e.stopPropogation; hide(this.querySelector(".details")); });
       tile.setAttribute("data-id", movieData.imdbID);
       tile.querySelector(".poster img").src = movieData.Poster;
-      tile.querySelector(".title").appendChild(document.createTextNode(movieData.Title));
-      tile.querySelector(".type").appendChild(document.createTextNode(movieData.Type));
+      tile.querySelector(".title").innerText = movieData.Title;
+      tile.querySelector(".type").innerText = movieData.Type;
 
       return tile;
     };
