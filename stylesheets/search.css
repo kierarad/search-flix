@@ -10,10 +10,10 @@ body {
   top: 0px;
   border-bottom: 1px solid #e6e6e6;
   z-index: 10; }
-  .header .search-form {
+  .header .search {
     width: 300px;
     margin: 0 auto; }
-    .header .search-form .search-bar {
+    .header .search .search-bar {
       -webkit-appearance: none;
       border-radius: 3px;
       border: 1px solid #f3f3f3;
