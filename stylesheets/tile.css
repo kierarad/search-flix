@@ -5,6 +5,8 @@
     clear: both;
     content: "";
     display: block; }
+  .tiles.hidden {
+    display: none; }
   .tiles .tile {
     width: calc(100% - 40px);
     float: left;
@@ -12,7 +14,6 @@
     background-color: #f3f3f3;
     text-align: center;
     text-transform: uppercase;
-    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     margin: 10px 0;
     border: 1px solid #e6e6e6;
     border-radius: 3px;

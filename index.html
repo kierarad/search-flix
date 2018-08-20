@@ -18,11 +18,11 @@
                   aria-label="Search movie titles"
                   id='search-input'
                   class='search-bar'
-                  oninput='document.getElementById("error-message").innerText = ""; MovieSearch().getMovies(this.value);'>  <!-- aria-label for accessibility -->
+                  oninput='MovieSearch().getMovies(this.value);'>  <!-- aria-label for accessibility -->
         </form>
     </div>
-    <div id="error-message"></div>
-    <div id="tiles" class="tiles">
+    <div class="error-message hidden"></div>
+    <div class="tiles">
       <div class="tile">
         <div class="poster"><img src="images/no_poster.jpg" onerror="this.src='images/no_poster.jpg'"></div>
         <div class="title"></div>
