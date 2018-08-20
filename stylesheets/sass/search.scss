@@ -11,6 +11,7 @@ body {
   width: 100%;
   top: 0px;
   border-bottom: 1px solid $border-color;
+  z-index: 10;
 
   .search-form {
     width: 300px;

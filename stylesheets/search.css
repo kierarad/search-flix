@@ -7,7 +7,8 @@ body {
   position: fixed;
   width: 100%;
   top: 0px;
-  border-bottom: 1px solid #e6e6e6; }
+  border-bottom: 1px solid #e6e6e6;
+  z-index: 10; }
   .header .search-form {
     width: 300px;
     margin: 0 auto; }
