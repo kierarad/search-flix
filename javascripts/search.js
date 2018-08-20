@@ -2,7 +2,7 @@
   "use strict";
 
   function MovieSearch() {
-    const APIKEY = 'aba065d3';
+    const APIKEY = '';
 
     var hide = function hide(element) {
       element.classList.add("hidden");
