@@ -18,7 +18,7 @@
                   aria-label="Search movie titles"
                   id='search-input'
                   class='search-bar'
-                  oninput='MovieSearch().getMovies(this.value);'>  <!-- aria-label for accessibility -->
+                  oninput='movieSearch.waitForInput(this.value);'>  <!-- aria-label for accessibility -->
         </div>
     </div>
     <div class="error-message hidden"></div>
@@ -31,7 +31,8 @@
       </div>
     </div>
     <script type="text/javascript">
-      MovieSearch().init();
+      var movieSearch = new MovieSearch();
+      movieSearch.init();
     </script>
   </body>
 </html>

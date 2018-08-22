@@ -3,16 +3,27 @@
 
   function MovieSearch() {
     const APIKEY = '';
+    let lastTerm = '';
 
-    var hide = function hide(element) {
-      element.classList.add("hidden");
+    this.waitForInput= (searchTerm) => {
+      lastTerm = searchTerm;
+      setTimeout(() => {
+        if (lastTerm === searchTerm) {
+          getMovies(searchTerm);
+        }
+      }, 500);
     };
 
-    var show = function show(element) {
-      element.classList.remove("hidden");
+
+    this.init = () => {
+      hide(document.querySelector(".error-message"));
+      addMovies(initData);
     };
 
-    var getMovies = function getMovies(searchTerm) {
+    const hide = element => { element.classList.add("hidden"); };
+    const show = element => { element.classList.remove("hidden"); };
+
+    const getMovies = (searchTerm) => {
       switch (searchTerm.length) {
         case 0:
           init();
@@ -30,7 +41,7 @@
               'apikey': APIKEY,
               's': searchTerm
             }
-          }).done(function onSuccess(r) {
+           }).done(r => {
             if (r.Response === "False" && r.Error) {
               showError(r.Error);
             }
@@ -38,25 +49,20 @@
             if (r.Response === "True") {
               addMovies(r.Search);
             }
-          }).fail(function onFailure(r) {
+          }).fail(r => {
             console.log(r.responseJSON.Error);
           });
       }
     };
 
-    var init = function init(){
-      hide(document.querySelector(".error-message"));
-      addMovies(initData);
-    };
-
-    var getDetails = function getDetails(tile) {
-      var detailsContainer = tile.querySelector(".details");
+    const getDetails = tile => {
+      const detailsContainer = tile.querySelector(".details");
       if (detailsContainer.childElementCount) {
         show(detailsContainer);
         return false;
       }
 
-      var imdbID = tile.dataset.id;
+      const imdbID = tile.dataset.id;
       if (imdbID === "") {
         return false;
       }
@@ -67,19 +73,19 @@
           'apikey': APIKEY,
           'i': imdbID
         }
-      }).done(function onSuccess(r) {
+      }).done(r => {
         if (r.Response === "True") {
           showDetails(r, detailsContainer);
         }
-      }).fail(function onFailure(r) {
+      }).fail(r => {
         console.log(r.responseJSON.Error);
       });
     }
 
-    var showDetails = function showDetails(details, detailsContainer) {
-      var topics = ["Title", "Year", "Genre", "Director", "imdbRating"];
-      for (var topic of topics) {
-        var infoDiv = document.createElement("div");
+    const showDetails = (details, detailsContainer) => {
+      const topics = ["Title", "Year", "Genre", "Director", "imdbRating"];
+      for (const topic of topics) {
+        const infoDiv = document.createElement("div");
         infoDiv.appendChild(document.createTextNode(topic + ": " + details[topic]));
         detailsContainer.appendChild(infoDiv);
       }
@@ -87,23 +93,25 @@
     };
 
 
-    var addMovies = function addMovies(movies) {
+    const addMovies = movies => {
       hide(document.querySelector(".error-message"));
-      var current = document.querySelector(".tiles");
-      var newContainer = document.createElement("div");
+      const current = document.querySelector(".tiles");
+      const newContainer = document.createElement("div");
       newContainer.classList.add("tiles");
 
-      for (var movieData of movies) {
-        var tile = createMovieTile(movieData);
+      for (const movieData of movies) {
+        const tile = createMovieTile(movieData);
         newContainer.appendChild(tile);
       }
 
       current.replaceWith(newContainer);
     };
 
-    var createMovieTile = function createMovieTile(movieData) {
-      var tileTemplate = document.querySelector(".tile");
-      var tile = tileTemplate.cloneNode(true);
+    const createMovieTile = movieData => {
+      const tileTemplate = document.querySelector(".tile");
+      const tile = tileTemplate.cloneNode(true);
+
+      removeChildren(tile.querySelector(".details"));
       tile.addEventListener("mouseenter", function(e) { e.stopPropogation; getDetails(this); });
       tile.addEventListener("mouseleave", function(e) { e.stopPropogation; hide(this.querySelector(".details")); });
       tile.setAttribute("data-id", movieData.imdbID);
@@ -114,19 +122,18 @@
       return tile;
     };
 
-    var showError = function showError(message) {
-      var errContainer = document.querySelector(".error-message");
-      while (errContainer.lastChild) {
-        errContainer.removeChild(errContainer.lastChild);
+    const removeChildren = parent => {
+      while (parent.lastChild) {
+        parent.removeChild(parent.lastChild);
       }
+    }
+
+    const showError = message => {
+      const errContainer = document.querySelector(".error-message");
+      removeChildren(errContainer);
       errContainer.appendChild(document.createTextNode(message));
       show(errContainer);
       hide(document.querySelector(".tiles"));
-    };
-
-    return {
-      getMovies: getMovies,
-      init: init
     };
   };
 

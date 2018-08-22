@@ -16,7 +16,7 @@ describe("MovieSearch", function() {
     movieSearch.getMovies("fab");
     request = jasmine.Ajax.requests.mostRecent();
 
-    expect(request.url).toBe('http://www.omdbapi.com/?apikey=aba065d3&s=fab');
+    expect(request.url).toBe('http://www.omdbapi.com/?apikey=&s=fab');
     expect(request.method).toBe('GET');
   });
 
